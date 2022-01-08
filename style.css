@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans';
+  background-color: rgba(156, 131, 95, 1);
+}
+/* navbar start here */
+nav {
+  display: flex;
+  padding: 0.5rem 2rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: rgba(114, 76, 33, 1);
+  font-size: 72px;
+  margin-right: 1rem;
+}
+
+.nav-logo {
+  margin-right: 1rem;
+}
+
+.nav-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-right: 1rem;
+  color: rgba(249, 178, 61, 1);
+}
+/* navbar end here */
+
+/* main start here */
+
+.container {
+  padding-right: 4rem;
+  padding-left: 4rem;
+  margin-right: auto;
+  margin-left: auto;
+
+  display: flex;
+  justify-content: center;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto 4rem;
+  position: relative;
+}
+
+.control img {
+  position: absolute;
+  bottom: -200px;
+  cursor: pointer;
+}
+
+.control h1 {
+  color: rgba(189, 0, 0, 1);
+  font-size: 144px;
+  text-align: center;
+}
+
+.player h1 {
+  font-size: 36px;
+  margin-bottom: 2rem;
+}
+
+.player ul {
+  list-style: none;
+}
+
+.player ul li {
+  cursor: pointer;
+  margin-bottom: 4rem;
+}
+
+.player-select {
+  background: black;
+  padding: 2rem;
+  background: rgba(196, 196, 196, 1);
+  border-radius: 30px;
+}
