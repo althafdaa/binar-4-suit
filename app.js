@@ -1,63 +1,208 @@
-// Abstraction
+// PLAYER SECTION START
+
 class Player {
   constructor() {
-    // DOM Selector
-    this.pilihan = document.querySelectorAll('li img');
-    this.reset = document.querySelector('.reset');
-  }
+    // DOM SELECTOR FOR PLAYER
+    this.batup = document.querySelector('.batu-p');
+    this.kertasp = document.querySelector('.kertas-p');
+    this.guntingp = document.querySelector('.gunting-p');
 
-  // method
-  gameStart() {
-    this.pilihan.forEach((selections) => {
-      selections.addEventListener('click', (selected) => {
-        // function
-        const pilihanKomputer = () => {
-          const random = Math.floor(Math.random() * 3 + 1);
-          if (random === 1) return 'batu';
-          if (random === 2) return 'gunting';
-          if (random === 3) return 'kertas';
-        };
-
-        const pilihanPlayer = selected.target.className;
-
-        if (pilihanPlayer == pilihanKomputer()) return console.log('SERI');
-        if (pilihanPlayer == 'batu')
-          return pilihanKomputer() == 'gunting'
-            ? console.log('WIN')
-            : console.log('LOSE');
-        if (pilihanPlayer == 'gunting')
-          return pilihanKomputer() == 'kertas'
-            ? console.log('WIN')
-            : console.log('LOSE');
-        if (pilihanPlayer == 'kertas')
-          return pilihanKomputer() == 'batu'
-            ? console.log('WIN')
-            : console.log('LOSE');
-      });
-    });
+    //    DOM SELECTOR FOR COM
+    this.batuc = document.querySelector('.batu-c');
+    this.kertasc = document.querySelector('.kertas-c');
+    this.guntingc = document.querySelector('.gunting-c');
   }
 }
 
-class NewPlayer extends Player {
+// PLAYER SECTION END
+
+// UI MANIPULATION SECTION START
+
+class UI {
   constructor() {
-    super();
+    this.resultText = document.createElement('h1');
+    this.resultContainer = document.querySelector('.vs');
+    this.pilihanPlayer;
+    this.pilihanKomputer;
   }
+  //   4kondisi
+  // kondisi normal
+  // kondisi menang
+  // kondisi kalah
+  // dan kondisi seri
+  showDefault = () => {
+    this.resultContainer.classList.remove('result-container__draw');
+    this.resultContainer.classList.remove('result-container__win');
+    this.resultText.classList.add('versus');
+    this.resultText.innerHTML = 'VS';
+    this.resultContainer.appendChild(this.resultText);
+  };
 
-  selectChoice() {
-    this.pilihan.forEach((selected) => {
-      selected.addEventListener('click', (selected) => {
-        document
-          .querySelector(`.${selected.target.className}`)
-          .classList.add('player-select');
-      });
-    });
-  }
+  showWin = () => {
+    this.resultContainer.classList.remove('result-container__draw');
+    this.resultText.classList.remove('versus');
+    this.resultContainer.classList.add('result-container__win');
+    this.resultText.innerHTML = 'PLAYER 1<br/>WIN';
+    this.resultContainer.appendChild(this.resultText);
+  };
+
+  showLose = () => {
+    this.resultContainer.classList.remove('result-container__draw');
+    this.resultText.classList.remove('versus');
+    this.resultContainer.classList.add('result-container__win');
+    this.resultText.innerHTML = 'COM<br/>WIN';
+    this.resultContainer.appendChild(this.resultText);
+  };
+
+  showDraw = () => {
+    this.resultContainer.classList.add('result-container__draw');
+    this.resultText.classList.remove('versus');
+    this.resultText.innerHTML = 'DRAW';
+    this.resultContainer.appendChild(this.resultText);
+  };
+
+  logicForUI = (pilihanPlayer, pilihanKomputer) => {
+    // return draw
+    if (pilihanPlayer == pilihanKomputer) return this.showDraw();
+    if (
+      (pilihanPlayer == 'batu' && pilihanKomputer == 'gunting') ||
+      (pilihanPlayer == 'gunting' && pilihanKomputer == 'kertas') ||
+      (pilihanPlayer == 'kertas' && pilihanKomputer == 'batu')
+    )
+      // return win
+      return this.showWin();
+    // return lose
+    if (
+      (pilihanPlayer == 'gunting' && pilihanKomputer == 'batu') ||
+      (pilihanPlayer == 'kertas' && pilihanKomputer == 'gunting') ||
+      (pilihanPlayer == 'batu' && pilihanKomputer == 'kertas')
+    )
+      return this.showLose();
+  };
 }
 
-// newObject
-const newGame = new Player();
-const SelectPlayer = new NewPlayer();
+// UI MANIPULATION SECTION END
 
-console.log(newGame.gameStart());
+// START NEW GAME
+class NewGame extends UI {
+  constructor(pilihanPlayer, pilihanKomputer) {
+    super(pilihanPlayer, pilihanKomputer);
+    this.reset = document.querySelector('.result-container__reset');
+    this.options = document.querySelectorAll('.options');
+    this.init();
+  }
 
-console.log(SelectPlayer.selectChoice());
+  init() {
+    this.player = new Player();
+    this.showDefault();
+    this.resetBtn();
+  }
+
+  userChoice = (user) => {
+    this.pilihanPlayer = user;
+    return this.pilihanPlayer;
+  };
+
+  comChoice = (com) => {
+    this.pilihanKomputer = com;
+    return this.pilihanKomputer;
+  };
+
+  playerOnclick = () => {
+    this.player.batup.onclick = () => {
+      //  tell javascript that player pick "batu"
+      this.userChoice('batu');
+      // tell js to manipulate batu img/button
+      this.player.batup.classList.add('player-selected');
+      this.disableGame();
+      this.generateComChoice();
+    };
+
+    this.player.kertasp.onclick = () => {
+      this.userChoice('kertas');
+      this.player.kertasp.classList.add('player-selected');
+      this.disableGame();
+      this.generateComChoice();
+    };
+
+    this.player.guntingp.onclick = () => {
+      this.userChoice('gunting');
+      this.player.guntingp.classList.add('player-selected');
+      this.disableGame();
+      this.generateComChoice();
+    };
+  };
+
+  comResponse = (choice) => {
+    console.log('com pilih', choice);
+    if (choice == 'batu') {
+      this.comChoice('batu');
+      this.player.batuc.classList.add('player-selected');
+      this.player.guntingc.classList.remove('player-selected');
+      this.player.kertasc.classList.remove('player-selected');
+    }
+    if (choice == 'kertas') {
+      this.comChoice('kertas');
+      this.player.kertasc.classList.add('player-selected');
+      this.player.batuc.classList.remove('player-selected');
+      this.player.guntingc.classList.remove('player-selected');
+    }
+    if (choice == 'gunting') {
+      this.comChoice('gunting');
+      this.player.guntingc.classList.add('player-selected');
+      this.player.batuc.classList.remove('player-selected');
+      this.player.kertasc.classList.remove('player-selected');
+    }
+  };
+
+  disableGame = () => {
+    this.player.batup.disabled = true;
+    this.player.guntingp.disabled = true;
+    this.player.kertasp.disabled = true;
+  };
+
+  uiResult = () => {
+    if (this.pilihanPlayer && this.pilihanKomputer) {
+      // inject the parameter to logicForUI
+      this.logicForUI(this.pilihanPlayer, this.pilihanKomputer);
+    }
+  };
+
+  resetBtn = () => {
+    this.reset.onclick = () => {
+      this.showDefault();
+      this.options.forEach((options) => {
+        options.classList.remove('player-selected');
+        options.disabled = false;
+      });
+    };
+  };
+
+  generateComChoice = () => {
+    const randomGenerator = () => {
+      const options = ['batu', 'gunting', 'kertas'];
+      return options[Math.floor(Math.random() * options.length)];
+    };
+
+    if (randomGenerator() == 'batu') {
+      this.comResponse('batu');
+      this.uiResult();
+    }
+    if (randomGenerator() == 'gunting') {
+      this.comResponse('gunting');
+      this.uiResult();
+    }
+    if (randomGenerator() == 'kertas') {
+      this.comResponse('kertas');
+      this.uiResult();
+    }
+  };
+
+  setGame = () => {
+    this.playerOnclick();
+  };
+}
+
+const GameStart = new NewGame();
+
+GameStart.setGame();

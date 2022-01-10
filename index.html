@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -12,98 +11,103 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <title>GAME SUIT</title>
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
   </head>
   <body>
-    <!-- NAVBAR -->
-    <nav class="navbar">
-      <a href="">
-        <i class="fas fa-angle-left"></i>
-      </a>
-      <div class="nav-logo">LOGO</div>
-      <h1 class="nav-title">ROCK PAPER SCISSORS</h1>
-    </nav>
+    <!-- HEADER -->
+    <header class="container">
+      <nav class="navbar">
+        <a href="">
+          <i class="fas fa-angle-left"></i>
+        </a>
+        <div class="nav-logo">LOGO</div>
+        <h1 class="nav-title">ROCK PAPER SCISSORS</h1>
+      </nav>
+    </header>
 
+    <!-- GAME -->
     <main class="container">
-      <div class="player">
-        <h1>PLAYER 1</h1>
-        <ul>
-          <li class="batu">
+      <!-- PLAYER SIDE -->
+      <div class="player-side">
+        <div class="player-side__title">
+          <h2>PLAYER 1</h2>
+        </div>
+        <div class="player-side__choice">
+          <button class="options batu-p">
             <img
-              id="batu"
-              class="batu"
               src="assets/batu.png"
-              alt=""
-              width="128px"
-              height="92px"
-            />
-          </li>
-          <li class="kertas">
-            <img
-              id="kertas"
-              class="kertas"
-              src="assets/kertas.png"
-              alt=""
-              width="134px"
-              height="168px"
-            />
-          </li>
-          <li class="gunting">
-            <img
-              id="gunting"
-              class="gunting"
-              src="assets/gunting.png"
-              alt=""
+              alt="batu"
               width="115px"
               height="150px"
             />
-          </li>
-        </ul>
-      </div>
-      <div class="control">
-        <h1>VS</h1>
-        <img
-          class="reset"
-          src="assets/refresh.png"
-          alt=""
-          width="77px"
-          height="71px"
-        />
-      </div>
-      <div class="player">
-        <h1>COM</h1>
-        <ul>
-          <li>
+          </button>
+          <button class="options gunting-p">
             <img
-              id="batu"
-              src="assets/batu.png"
-              alt=""
-              width="128px"
-              height="92px"
-            />
-          </li>
-          <li>
-            <img
-              id="kertas"
-              src="assets/kertas.png"
-              alt=""
-              width="134px"
-              height="168px"
-            />
-          </li>
-          <li>
-            <img
-              id="gunting"
               src="assets/gunting.png"
-              alt=""
+              alt="gunting"
               width="115px"
               height="150px"
             />
-          </li>
-        </ul>
+          </button>
+          <button class="options kertas-p">
+            <img
+              src="assets/kertas.png"
+              alt="kertas"
+              width="134px"
+              height="160px"
+            />
+          </button>
+        </div>
+      </div>
+      <!-- RESULT/VS/RESET -->
+      <div class="result-container">
+        <div class="vs">
+          <!-- <h1>VS</h1> -->
+        </div>
+        <button class="result-container__reset">
+          <img
+            src="assets/refresh.png"
+            alt="refresh"
+            width="77px"
+            height="71px"
+          />
+        </button>
+      </div>
+
+      <!-- COMSIDE -->
+      <div class="com-side">
+        <div class="com-side__title">
+          <h2>COM</h2>
+        </div>
+        <div class="com-side__choice">
+          <button class="options batu-c">
+            <img
+              src="assets/batu.png"
+              alt="batu"
+              width="115px"
+              height="150px"
+            />
+          </button>
+          <button class="options gunting-c">
+            <img
+              src="assets/gunting.png"
+              alt="gunting"
+              width="115px"
+              height="150px"
+            />
+          </button>
+          <button class="options kertas-c">
+            <img
+              src="assets/kertas.png"
+              alt="kertas"
+              width="134px"
+              height="160px"
+            />
+          </button>
+        </div>
       </div>
     </main>
-
     <script src="app.js"></script>
   </body>
 </html>

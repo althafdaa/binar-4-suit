@@ -10,82 +10,107 @@ body {
   font-family: 'Open Sans';
   background-color: rgba(156, 131, 95, 1);
 }
-/* navbar start here */
-nav {
-  display: flex;
-  padding: 0.5rem 2rem;
-  align-items: center;
-  margin-bottom: 1rem;
-}
 
-nav a {
-  text-decoration: none;
-  color: rgba(114, 76, 33, 1);
-  font-size: 72px;
-  margin-right: 1rem;
-}
-
-.nav-logo {
-  margin-right: 1rem;
-}
-
-.nav-title {
-  font-size: 36px;
-  font-weight: 700;
-  margin-right: 1rem;
+header h1 {
   color: rgba(249, 178, 61, 1);
 }
-/* navbar end here */
-
-/* main start here */
 
 .container {
   padding-right: 4rem;
   padding-left: 4rem;
   margin-right: auto;
   margin-left: auto;
-
   display: flex;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+}
+
+main {
   justify-content: center;
 }
 
-.control {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: auto 4rem;
-  position: relative;
+.player-side__title {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.com-side__title {
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
-.control img {
-  position: absolute;
-  bottom: -200px;
+.player-side__choice {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-right: 3rem;
+}
+.com-side__choice {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-left: 3rem;
+}
+
+button {
+  background: none;
+  border: none;
   cursor: pointer;
 }
 
-.control h1 {
+button:active {
+  transform: scale(1.08);
+}
+
+.result-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.result-container__reset {
+  position: absolute;
+  bottom: -2rem;
+}
+
+.fa-angle-left {
+  font-size: 72px;
+  color: rgba(114, 76, 33, 1);
+}
+
+/* conditionals */
+
+.player-selected {
+  padding: 2rem;
+  background: rgba(196, 196, 196, 1);
+  border-radius: 30px;
+}
+
+.versus {
   color: rgba(189, 0, 0, 1);
   font-size: 144px;
   text-align: center;
 }
 
-.player h1 {
-  font-size: 36px;
-  margin-bottom: 2rem;
+.result-container__draw {
+  background: rgba(3, 91, 12, 1);
+  padding: 20px 40px;
+  color: white;
+  text-align: center;
+  transform: rotate(-30deg);
 }
 
-.player ul {
-  list-style: none;
-}
-
-.player ul li {
-  cursor: pointer;
-  margin-bottom: 4rem;
-}
-
-.player-select {
-  background: black;
-  padding: 2rem;
-  background: rgba(196, 196, 196, 1);
-  border-radius: 30px;
+.result-container__win {
+  background: rgba(76, 150, 84, 1);
+  padding: 20px 40px;
+  color: white;
+  text-align: center;
+  transform: rotate(-30deg);
 }
