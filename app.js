@@ -13,11 +13,9 @@ class Player {
     this.guntingc = document.querySelector('.gunting-c');
   }
 }
-
 // PLAYER SECTION END
 
 // UI MANIPULATION SECTION START
-
 class UI {
   constructor() {
     this.resultText = document.createElement('h1');
@@ -25,7 +23,7 @@ class UI {
     this.pilihanPlayer;
     this.pilihanKomputer;
   }
-  //   4kondisi
+  // 4kondisi
   // kondisi normal
   // kondisi menang
   // kondisi kalah
@@ -89,23 +87,22 @@ class NewGame extends UI {
     super(pilihanPlayer, pilihanKomputer);
     this.reset = document.querySelector('.result-container__reset');
     this.options = document.querySelectorAll('.options');
+    // immediately execute init() method setiap `new NewGame`
     this.init();
   }
 
-  init() {
+  init = () => {
     this.player = new Player();
     this.showDefault();
     this.resetBtn();
-  }
+  };
 
   userChoice = (user) => {
-    this.pilihanPlayer = user;
-    return this.pilihanPlayer;
+    return (this.pilihanPlayer = user);
   };
 
   comChoice = (com) => {
-    this.pilihanKomputer = com;
-    return this.pilihanKomputer;
+    return (this.pilihanKomputer = com);
   };
 
   playerOnclick = () => {
@@ -184,15 +181,17 @@ class NewGame extends UI {
       return options[Math.floor(Math.random() * options.length)];
     };
 
-    if (randomGenerator() == 'batu') {
+    const random = randomGenerator();
+
+    if (random == 'batu') {
       this.comResponse('batu');
       this.uiResult();
     }
-    if (randomGenerator() == 'gunting') {
+    if (random == 'gunting') {
       this.comResponse('gunting');
       this.uiResult();
     }
-    if (randomGenerator() == 'kertas') {
+    if (random == 'kertas') {
       this.comResponse('kertas');
       this.uiResult();
     }
