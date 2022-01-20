@@ -1,5 +1,4 @@
 // PLAYER SECTION START
-
 class Player {
   constructor() {
     // DOM SELECTOR FOR PLAYER
@@ -61,19 +60,19 @@ class UI {
 
   logicForUI = (pilihanPlayer, pilihanKomputer) => {
     // return draw
-    if (pilihanPlayer == pilihanKomputer) return this.showDraw();
+    if (pilihanPlayer === pilihanKomputer) return this.showDraw();
     if (
-      (pilihanPlayer == 'batu' && pilihanKomputer == 'gunting') ||
-      (pilihanPlayer == 'gunting' && pilihanKomputer == 'kertas') ||
-      (pilihanPlayer == 'kertas' && pilihanKomputer == 'batu')
+      (pilihanPlayer === 'batu' && pilihanKomputer === 'gunting') ||
+      (pilihanPlayer === 'gunting' && pilihanKomputer === 'kertas') ||
+      (pilihanPlayer === 'kertas' && pilihanKomputer === 'batu')
     )
       // return win
       return this.showWin();
     // return lose
     if (
-      (pilihanPlayer == 'gunting' && pilihanKomputer == 'batu') ||
-      (pilihanPlayer == 'kertas' && pilihanKomputer == 'gunting') ||
-      (pilihanPlayer == 'batu' && pilihanKomputer == 'kertas')
+      (pilihanPlayer === 'gunting' && pilihanKomputer === 'batu') ||
+      (pilihanPlayer === 'kertas' && pilihanKomputer === 'gunting') ||
+      (pilihanPlayer === 'batu' && pilihanKomputer === 'kertas')
     )
       return this.showLose();
   };
@@ -87,7 +86,7 @@ class NewGame extends UI {
     super(pilihanPlayer, pilihanKomputer);
     this.reset = document.querySelector('.result-container__reset');
     this.options = document.querySelectorAll('.options');
-    // immediately execute init() method setiap `new NewGame`
+    // immediately execute init() method setiap `new NewGame`dipanggil
     this.init();
   }
 
@@ -97,18 +96,10 @@ class NewGame extends UI {
     this.resetBtn();
   };
 
-  userChoice = (user) => {
-    return (this.pilihanPlayer = user);
-  };
-
-  comChoice = (com) => {
-    return (this.pilihanKomputer = com);
-  };
-
-  playerOnclick = () => {
+  playerHandler = () => {
     this.player.batup.onclick = () => {
       //  tell javascript that player pick "batu"
-      this.userChoice('batu');
+      this.pilihanPlayer = 'batu';
       // tell js to manipulate batu img/button
       this.player.batup.classList.add('player-selected');
       this.disableGame();
@@ -116,36 +107,35 @@ class NewGame extends UI {
     };
 
     this.player.kertasp.onclick = () => {
-      this.userChoice('kertas');
+      this.pilihanPlayer = 'kertas';
       this.player.kertasp.classList.add('player-selected');
       this.disableGame();
       this.generateComChoice();
     };
 
     this.player.guntingp.onclick = () => {
-      this.userChoice('gunting');
+      this.pilihanPlayer = 'gunting';
       this.player.guntingp.classList.add('player-selected');
       this.disableGame();
       this.generateComChoice();
     };
   };
 
-  comResponse = (choice) => {
-    console.log('com pilih', choice);
-    if (choice == 'batu') {
-      this.comChoice('batu');
+  comHandler = (choice) => {
+    if (choice === 'batu') {
+      this.pilihanKomputer = choice;
       this.player.batuc.classList.add('player-selected');
       this.player.guntingc.classList.remove('player-selected');
       this.player.kertasc.classList.remove('player-selected');
     }
-    if (choice == 'kertas') {
-      this.comChoice('kertas');
+    if (choice === 'kertas') {
+      this.pilihanKomputer = choice;
       this.player.kertasc.classList.add('player-selected');
       this.player.batuc.classList.remove('player-selected');
       this.player.guntingc.classList.remove('player-selected');
     }
-    if (choice == 'gunting') {
-      this.comChoice('gunting');
+    if (choice === 'gunting') {
+      this.pilihanKomputer = choice;
       this.player.guntingc.classList.add('player-selected');
       this.player.batuc.classList.remove('player-selected');
       this.player.kertasc.classList.remove('player-selected');
@@ -168,9 +158,9 @@ class NewGame extends UI {
   resetBtn = () => {
     this.reset.onclick = () => {
       this.showDefault();
-      this.options.forEach((options) => {
-        options.classList.remove('player-selected');
-        options.disabled = false;
+      this.options.forEach((option) => {
+        option.classList.remove('player-selected');
+        option.disabled = false;
       });
     };
   };
@@ -183,22 +173,22 @@ class NewGame extends UI {
 
     const random = randomGenerator();
 
-    if (random == 'batu') {
-      this.comResponse('batu');
+    if (random === 'batu') {
+      this.comHandler('batu');
       this.uiResult();
     }
-    if (random == 'gunting') {
-      this.comResponse('gunting');
+    if (random === 'gunting') {
+      this.comHandler('gunting');
       this.uiResult();
     }
-    if (random == 'kertas') {
-      this.comResponse('kertas');
+    if (random === 'kertas') {
+      this.comHandler('kertas');
       this.uiResult();
     }
   };
 
   setGame = () => {
-    this.playerOnclick();
+    this.playerHandler();
   };
 }
 
