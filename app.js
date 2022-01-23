@@ -22,11 +22,7 @@ class UI {
     this.pilihanPlayer;
     this.pilihanKomputer;
   }
-  // 4kondisi
-  // kondisi normal
-  // kondisi menang
-  // kondisi kalah
-  // dan kondisi seri
+
   showDefault = () => {
     this.resultContainer.classList.remove('result-container__draw');
     this.resultContainer.classList.remove('result-container__win');
@@ -86,7 +82,6 @@ class NewGame extends UI {
     super(pilihanPlayer, pilihanKomputer);
     this.reset = document.querySelector('.result-container__reset');
     this.options = document.querySelectorAll('.options');
-    // immediately execute init() method setiap `new NewGame`dipanggil
     this.init();
   }
 
@@ -98,9 +93,7 @@ class NewGame extends UI {
 
   playerHandler = () => {
     this.player.batup.onclick = () => {
-      //  tell javascript that player pick "batu"
       this.pilihanPlayer = 'batu';
-      // tell js to manipulate batu img/button
       this.player.batup.classList.add('player-selected');
       this.disableGame();
       this.generateComChoice();
@@ -150,7 +143,6 @@ class NewGame extends UI {
 
   uiResult = () => {
     if (this.pilihanPlayer && this.pilihanKomputer) {
-      // inject the parameter to logicForUI
       this.logicForUI(this.pilihanPlayer, this.pilihanKomputer);
     }
   };
@@ -165,13 +157,13 @@ class NewGame extends UI {
     };
   };
 
-  generateComChoice = () => {
-    const randomGenerator = () => {
-      const options = ['batu', 'gunting', 'kertas'];
-      return options[Math.floor(Math.random() * options.length)];
-    };
+  randomGenerator = () => {
+    const options = ['batu', 'gunting', 'kertas'];
+    return options[Math.floor(Math.random() * options.length)];
+  };
 
-    const random = randomGenerator();
+  generateComChoice = () => {
+    const random = this.randomGenerator();
 
     if (random === 'batu') {
       this.comHandler('batu');
