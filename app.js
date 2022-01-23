@@ -55,16 +55,13 @@ class UI {
   };
 
   logicForUI = (pilihanPlayer, pilihanKomputer) => {
-    // return draw
     if (pilihanPlayer === pilihanKomputer) return this.showDraw();
     if (
       (pilihanPlayer === 'batu' && pilihanKomputer === 'gunting') ||
       (pilihanPlayer === 'gunting' && pilihanKomputer === 'kertas') ||
       (pilihanPlayer === 'kertas' && pilihanKomputer === 'batu')
     )
-      // return win
       return this.showWin();
-    // return lose
     if (
       (pilihanPlayer === 'gunting' && pilihanKomputer === 'batu') ||
       (pilihanPlayer === 'kertas' && pilihanKomputer === 'gunting') ||
@@ -136,9 +133,7 @@ class NewGame extends UI {
   };
 
   disableGame = () => {
-    this.player.batup.disabled = true;
-    this.player.guntingp.disabled = true;
-    this.player.kertasp.disabled = true;
+    this.options.forEach((option) => (option.disabled = true));
   };
 
   uiResult = () => {
@@ -165,16 +160,8 @@ class NewGame extends UI {
   generateComChoice = () => {
     const random = this.randomGenerator();
 
-    if (random === 'batu') {
-      this.comHandler('batu');
-      this.uiResult();
-    }
-    if (random === 'gunting') {
-      this.comHandler('gunting');
-      this.uiResult();
-    }
-    if (random === 'kertas') {
-      this.comHandler('kertas');
+    if (random) {
+      this.comHandler(random);
       this.uiResult();
     }
   };
