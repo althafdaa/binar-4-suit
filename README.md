@@ -2,6 +2,8 @@
 
 Binar Academy challenge for chapter 4. The main challenge is to make a game "suit" / rock paper scissors with Vanilla Javascript and OOP Concept (Classes & Inheritance). UI for the game is sliced from figma file provided by Binar Academy.
 
+Deployed Website: [https://suit-challenge.netlify.app/game.html](https://suit-challenge.netlify.app/game.html)
+
 ### Features
 
 - Rock Paper Scissors as Player
